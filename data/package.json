@@ -1,0 +1,25 @@
+{
+  "name": "kOverlay",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lukáš Jech",
+  "window": {
+    "toolbar":true,
+    "frame":false,
+    "width": 10000,
+    "height": 10000,
+    "transparent":true,
+    "show_in_taskbar":false,
+    "show": false,
+    "name":"kOverlayMain"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "pretty-bytes": "^1.0.2"
+  },
+  "app-id": "cz.klukule.app.overlay"
+}
