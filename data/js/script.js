@@ -15,6 +15,8 @@ var AppShowEnabled = false;
 var visible = false;
 var flaunch = true;
 
+require('shelljs');
+
 $(function(){
 	$('html').css("display","none");
 
@@ -65,6 +67,15 @@ $(function(){
 
 	//Generate data
 	InitDisplay();
+
+	$(document).keypress(function(e) {
+    if(e.which == 13) {
+        ExecuteCommandKeyboard();
+    }
+	});
+	$(document).on('click', ".flip-current", function(e) {
+		ExecuteCommand($(this).data("IconInfo"));
+	});
 });
 
 
@@ -107,13 +118,12 @@ function GenCarousel(cid, callback) {
 
 		for (var i = 0; i < data.length; i++) {
 			var item = data[i];
-			GenerateSlide(ul,item.Command,item.Name,item.Image);
+			GenerateSlide(ul,item.Command,item.Name,item.Image,item.Command);
 
 		}
 		// $('.flipser').css("height",$('html').height());
 		ul.waitForImages(function() {
 			$('html').css("display","block");
-			console.log(document.height);
 			$('#'+cid).flipster({
 				style: 'carousel',
 				touch: true
@@ -154,9 +164,9 @@ function FadeOut(callback){
 }
 
 
-function GenerateSlide(ul,href,title,image){
-	var li = $('<li><img / onclick="ExecuteCommand()"><a target="_blank" onclick="ExecuteCommand()"></a></li>');
-
+function GenerateSlide(ul,href,title,image,command){
+	var li = $('<li><img /><a target="_blank"></a></li>');
+	li.data("IconInfo",[title,image,command]);
 	li.find('a')
 		.attr('href', href)
 		.text(title);
@@ -236,7 +246,13 @@ function RegisterHotKey(){
 	gui.App.registerGlobalHotKey(shortcut);
 }
 
-function ExecuteCommand(){
-	//Find command from node
-	//Execute command
+function ExecuteCommand(data){
+	console.log(data);
+	console.log(gui);
+	gui.Shell.openItem(data[2]);
+}
+
+function ExecuteCommandKeyboard(){
+	var data = $(".flip-current").data("IconInfo");
+	ExecuteCommand(data);
 }

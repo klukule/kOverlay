@@ -8,7 +8,7 @@
   },
   "author": "Lukáš Jech",
   "window": {
-    "toolbar": false,
+    "toolbar": true,
     "frame": false,
     "width": 10000,
     "height": 10000,
