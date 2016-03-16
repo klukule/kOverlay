@@ -33,7 +33,7 @@ $(function(){
 		position: 'center',
 		width: 1280,
 		height: 720,
-		toolbar:false,
+		toolbar:true,
 		show:false,
 		frame:false,
 		transparent:true,
@@ -126,7 +126,8 @@ function GenCarousel(cid, callback) {
 			$('html').css("display","block");
 			$('#'+cid).flipster({
 				style: 'carousel',
-				touch: true
+				touch: true,
+				start:0
 			});
 
 			$('#'+cid).on('click', 'a', function (e) {
@@ -249,10 +250,37 @@ function RegisterHotKey(){
 function ExecuteCommand(data){
 	console.log(data);
 	console.log(gui);
+	$('#modalImg').attr('src',data[1]);
+	$("#modalAppName").text(data[0]);
+	if(settings.loadmessage){
+		ModalLaunching();
+	}
 	gui.Shell.openItem(data[2]);
 }
 
 function ExecuteCommandKeyboard(){
 	var data = $(".flip-current").data("IconInfo");
 	ExecuteCommand(data);
+}
+
+function ModalLaunching(){
+	if(settings.background == false){
+		$("#lmb").css("display","none");
+	}else{
+		$("#lmb").css("display","block");
+	}
+ $("#launchingModal").css("opacity",0);
+	$('#launchingModal').addClass(function(){
+		$('#launchingModal').animate({opacity: 1}, 'slow');
+		return "is-active";
+	});
+
+
+	setTimeout(function(){
+		$('#launchingModal').animate({opacity: 0}, 'slow',function(){
+			$('#launchingModal').removeClass("is-active");
+			AppWin.focus();
+		});
+	},3000);
+
 }

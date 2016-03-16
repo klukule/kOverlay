@@ -56,21 +56,76 @@ $(function(){
     SwitchTo("tab3");
   });
 
- var dashboardTable = $("#dashboardTable");
-
  GenTables();
 
 });
 function GenTables(){
   var dashboardTable = $("#dashboardTable");
   dashboardTable.html("");
-  console.log(data.settings);
   AddElement(dashboardTable,"Background enabled"         ,data.settings["background"]  ,"background" ,"bool"   , "settings");
   AddElement(dashboardTable,"Background color 1"         ,data.settings["bg1"]         ,"bg1"        ,"color"  , "settings");
   AddElement(dashboardTable,"Background color 2"         ,data.settings["bg2"]         ,"bg2"        ,"color"  , "settings");
   AddElement(dashboardTable,"Show overlay hotkey"        ,data.settings["shortcut"]    ,"shortcut"   ,"hotkey" , "settings");
   AddElement(dashboardTable,"Show overlay after startup" ,data.settings["showatstart"] ,"showatstart","bool"   , "settings");
+  AddElement(dashboardTable,"Show Loading message"       ,data.settings["loadmessage"] ,"loadmessage","bool"   , "settings");
+
+  GenIcons();
 }
+
+function GenIcons(){
+  var table = $("#shortcutsTable");
+  table.parent().html("<tbody id='shortcutsTable'></tbody>");
+  var table = $("#shortcutsTable");
+  $("<thead><tr><th>Add</th><th></th><th></th><th></th><th></th><th class='table-link table-icon'><a href='#' onclick='ShowModal()'><i class='fa fa-plus'></i></a></th></tr>thead>").appendTo(table.parent());
+  for(var i in data.data){
+    var comp = "<tr>";
+    comp +="<td>"+data.data[i].Name+"</td>";
+    comp +="<td>"+data.data[i].Command+"</td>";
+    if(i < data.data.length - 1){
+      comp +="<td class='table-link table-icon'><a href='#' onclick='MoveDown("+i+")'><i class='fa fa-arrow-down'></i></a></td>";
+    }else{
+      comp += "<td></td>";
+    }
+    if(i > 0){
+      comp +="<td class='table-link table-icon'><a href='#' onclick='MoveUp("+i+")'><i class='fa fa-arrow-up'></i></a></td>";
+    }else{
+      comp += "<td></td>";
+    }
+    comp += "<td class='table-link table-icon'><a href='#' onclick='ModalEdit("+i+")'><i class='fa fa-pencil'></i></a></td>";
+    comp += "<td class='table-link table-icon is-alert'><a href='#' onclick='Remove("+i+")'><i class='fa fa-times'></i></a></td>";
+    comp += "</tr>";
+    var tr = $(comp);
+    tr.appendTo(table);
+  }
+  $("<tfoot><tr><th>Add</th><th></th><th></th><th></th><th></th><th class='table-link table-icon'><a href='#' onclick='ShowModal()'><i class='fa fa-plus'></i></a></th></tr>tfoot>").appendTo(table.parent());
+
+}
+function MoveDown(index){
+  var temp = data.data[index];
+  data.data[index] = data.data[index+1];
+  data.data[index+1] = temp;
+  SaveData();
+  GenTables();
+}
+function MoveUp(index){
+  var temp = data.data[index];
+  data.data[index] = data.data[index-1];
+  data.data[index-1] = temp;
+  SaveData();
+  GenTables();
+}
+
+function Remove(index){
+  data.data.splice(index,1);
+  SaveData();
+  GenTables();
+}
+
+function SaveData(){
+  fs.writeFileSync("../data.json",JSON.stringify(data.data));
+
+}
+
 function AddElement(table,title,value,id,type,file){
   var ids = "\"" + id + "\"";
   var titles = "\"" + title + "\"";

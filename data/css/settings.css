@@ -12,10 +12,18 @@ body{
   padding: 20px;
 }
 
+.modal-background{
+  left: 5px !important;
+  top: 5px !important;
+  right: 5px !important;
+  bottom: 5px !important;
+}
+
 .limited-height{
   min-height: 414px; /* -42px when in debug */
   max-height: 414px; /* -42px when in debug */
   overflow-y: auto;
+  padding-bottom: 0;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track
