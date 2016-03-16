@@ -1,5 +1,5 @@
 var data = {
-  "settings":{},
+  "settings":{}
   "data":{}
 };
 
@@ -8,13 +8,9 @@ var aid;
 var avalue;
 var afile;
 
-var gui = require('nw.gui');
-var fs = require('fs');
-
 $(function(){
 
-  data.settings = JSON.parse(fs.readFileSync('../settings.json'));
-	data.data = JSON.parse(fs.readFileSync('../data.json'));
+  //Load settings file
 
   $('.modal-background, .modal-close').click(function() {
     $(this).parent().removeClass('is-active');
@@ -86,7 +82,4 @@ function ShowModal(id,type,value,file){
 function Save(val){
   data[afile][aid] = val;
   GenTables();
-  console.log("../"+afile+".json");
-  fs.writeFileSync("../"+afile+".json",JSON.stringify(data[afile]));
-  gui.App.quit();
 }

@@ -11,34 +11,15 @@ var tray;
 
 var visible = false;
 
-var origHtml = "";
 
 $(function(){
-	origHtml = $('html').html();
 	$('html').css("display","none");
 
 	AppWin.setShowInTaskbar(false);
 	AppWin.setAlwaysOnTop(true);
 	AppWin.moveTo(0,0);
 	AppWin.resizeTo(window.screen.width,window.screen.height);
-	/*fs.watchFile('../settings.json',function(){
-		settings = JSON.parse(fs.readFileSync('../settings.json'));
-	});
-	fs.watchFile('../data.json',function(){
-		data = JSON.parse(fs.readFileSync('../data.json'));
-		$('html').html(origHtml);
-		GenCarousel(function(){
-			if(settings.background == "true"){
-				$('html').css("background","radial-gradient(ellipse at center, "+settings.bg1+" 0%,"+settings.bg2 + " 100%");
-			}
-			if(settings.showatstart == "true"){
-				ShowApp();
-			}else{
-				HideApp();
-				//ShowNotification("App started","App is running, press " + settings.shortcut + " to show it");
-			}
-		});
-	});*/
+
 	settings = JSON.parse(fs.readFileSync('../settings.json'));
 	data = JSON.parse(fs.readFileSync('../data.json'));
 
@@ -64,10 +45,10 @@ $(function(){
 	gui.App.registerGlobalHotKey(shortcut);
 
 	GenCarousel(function(){
-		if(settings.background == "true"){
+		if(settings.background){
 			$('html').css("background","radial-gradient(ellipse at center, "+settings.bg1+" 0%,"+settings.bg2 + " 100%");
 		}
-		if(settings.showatstart == "true"){
+		if(settings.showatstart){
 			ShowApp();
 		}else{
 			HideApp();
@@ -79,12 +60,12 @@ $(function(){
 		position: 'center',
 		width: 1280,
 		height: 720,
-		toolbar:true,
+		toolbar:false,
 		show:false,
 		title: "Settings"
 	});
 	SettingsWin.on('close', function() {
-  SettingsWin.hide();
+  	SettingsWin.hide();
 	});
 });
 
@@ -95,6 +76,7 @@ function GenCarousel(callback) {
 			GenerateSlide(ul,item.Command,item.Name,item.Image);
 
 		}
+		// $('.flipser').css("height",$('html').height());
 		ul.waitForImages(function() {
 			$('html').css("display","block");
 			$('.flipster').flipster({
@@ -188,6 +170,6 @@ function InitTray(){
 	tray.on("click",function(){
 		HideApp();
 		SettingsWin.show();
-		SettingsWin.focus();
+		SwttingsWin.focus();
 	});
 }

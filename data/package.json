@@ -1,21 +1,20 @@
 {
-  "name": "kOverlay",
+  "name": "nw-app",
   "version": "1.0.0",
   "description": "",
   "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Lukáš Jech",
+  "author": "",
   "window": {
-    "toolbar":true,
+    "toolbar":false,
     "frame":false,
     "width": 10000,
     "height": 10000,
     "transparent":true,
     "show_in_taskbar":false,
-    "show": false,
-    "name":"kOverlayMain"
+    "show": false
   },
   "license": "ISC",
   "dependencies": {
