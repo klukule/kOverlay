@@ -1,5 +1,5 @@
 var data = {
-  "settings":{}
+  "settings":{},
   "data":{}
 };
 
@@ -8,9 +8,14 @@ var aid;
 var avalue;
 var afile;
 
-$(function(){
+var gui = require('nw.gui');
+var fs = require('fs');
 
+$(function(){
+  $(".appVer").text(gui.App.manifest.version);
   //Load settings file
+  data.settings = JSON.parse(fs.readFileSync('../settings.json'));
+	data.data = JSON.parse(fs.readFileSync('../data.json'));
 
   $('.modal-background, .modal-close').click(function() {
     $(this).parent().removeClass('is-active');
@@ -41,6 +46,7 @@ $(function(){
 function GenTables(){
   var dashboardTable = $("#dashboardTable");
   dashboardTable.html("");
+  console.log(data.settings);
   AddElement(dashboardTable,"Background enabled"         ,data.settings["background"]  ,"background" ,"bool"   , "settings");
   AddElement(dashboardTable,"Background color 1"         ,data.settings["bg1"]         ,"bg1"        ,"color"  , "settings");
   AddElement(dashboardTable,"Background color 2"         ,data.settings["bg2"]         ,"bg2"        ,"color"  , "settings");
@@ -82,4 +88,14 @@ function ShowModal(id,type,value,file){
 function Save(val){
   data[afile][aid] = val;
   GenTables();
+  //Convert stringified bool to bool
+  if(val == "true"){
+    val = true;
+    data[afile][aid] = val;
+  }else if(val == "false"){
+    val = false;
+    data[afile][aid] = val;
+  }
+
+  fs.writeFileSync("../"+afile+".json",JSON.stringify(data[afile]));
 }

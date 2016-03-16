@@ -8,54 +8,25 @@ var SettingsWin;
 var data = "";
 var settings = "";
 var tray;
+var shortcut;
+var CarouselID;
+var AppShowEnabled = false;
 
 var visible = false;
-
+var flaunch = true;
 
 $(function(){
 	$('html').css("display","none");
 
+	//Setup window
 	AppWin.setShowInTaskbar(false);
 	AppWin.setAlwaysOnTop(true);
 	AppWin.moveTo(0,0);
 	AppWin.resizeTo(window.screen.width,window.screen.height);
-
-	settings = JSON.parse(fs.readFileSync('../settings.json'));
-	data = JSON.parse(fs.readFileSync('../data.json'));
-
-	gui.App.createShortcut(process.env.APPDATA + "\\Microsoft\\Windows\\Start Menu\\Programs\\temp\\kOverlay.lnk"); //It needs to have shortcut to be albe to show notifications (windows 8 and higher)
-
-	InitTray();
-
-	var option = {
-	  key : settings.shortcut,
-	  active : function() {
-			if(visible){
-				HideApp();
-			}else{
-				ShowApp();
-			}
-	  },
-	  failed : function(msg) {
-	    alert(msg);
-	  }
-	};
-	var shortcut = new gui.Shortcut(option);
-
-	gui.App.registerGlobalHotKey(shortcut);
-
-	GenCarousel(function(){
-		if(settings.background){
-			$('html').css("background","radial-gradient(ellipse at center, "+settings.bg1+" 0%,"+settings.bg2 + " 100%");
-		}
-		if(settings.showatstart){
-			ShowApp();
-		}else{
-			HideApp();
-			ShowNotification("App started","App is running, press " + settings.shortcut + " to show it");
-		}
+	AppWin.on('close',function(){
+		gui.App.quit();
 	});
-
+	//Setup settings window
 	SettingsWin = gui.Window.open ('settings.html', {
 		position: 'center',
 		width: 1280,
@@ -65,12 +36,68 @@ $(function(){
 		title: "Settings"
 	});
 	SettingsWin.on('close', function() {
-  	SettingsWin.hide();
+		SettingsWin.hide();
 	});
+	//Load files
+	ReloadData();
+	ReloadSettings();
+
+	//Watch files
+	fs.watchFile('../data.json',function(){
+		ReloadData();
+		InitDisplay(); //Reinit data
+	});
+	fs.watchFile('../settings.json',function(){
+		ReloadSettings();
+	});
+
+	//Setup tray icon
+	InitTray();
+	//Register Hotkey
+	RegisterHotKey();
+
+	//GenerateData
+	InitDisplay();
+	flaunch = false;
 });
 
-function GenCarousel(callback) {
-		var ul = $('.flipster ul');
+
+function InitDisplay(){
+	AppShowEnabled = false;
+	CarouselID = (new Date).getTime(); //Just to have allways random id
+	GenCarousel(CarouselID, function(){
+		AppShowEnabled = true;
+		if(flaunch){
+			if(settings.showatstart){
+				ShowApp();
+			}else{
+				HideApp(); //Just 4 to be sure
+				ShowNotification("App started","App is running, press " + settings.shortcut + " to show it");
+			}
+		}
+	});
+}
+
+function ReloadData() {
+	data = JSON.parse(fs.readFileSync('../data.json'));
+	InitDisplay(); //Reinit carousel
+}
+
+function ReloadSettings() {
+	settings = JSON.parse(fs.readFileSync('../settings.json'));
+	if(settings.background){
+		$('html').css("background","radial-gradient(ellipse at center, "+settings.bg1+" 0%,"+settings.bg2 + " 100%");
+	}else{
+		$('html').css("background","rgba(0,0,0,0)"); //Transparent background
+
+	}
+	RegisterHotKey();
+}
+
+function GenCarousel(cid, callback) {
+		$("#container").html('<div class="flipster" id="'+cid+'"><ul></ul></div>');
+		var ul = $('#'+cid+' ul');
+
 		for (var i = 0; i < data.length; i++) {
 			var item = data[i];
 			GenerateSlide(ul,item.Command,item.Name,item.Image);
@@ -79,12 +106,13 @@ function GenCarousel(callback) {
 		// $('.flipser').css("height",$('html').height());
 		ul.waitForImages(function() {
 			$('html').css("display","block");
-			$('.flipster').flipster({
+			console.log(document.height);
+			$('#'+cid).flipster({
 				style: 'carousel',
 				touch: true
 			});
 
-			$('.flipster').on('click', 'a', function (e) {
+			$('#'+cid).on('click', 'a', function (e) {
 
 				e.preventDefault();
 
@@ -93,7 +121,7 @@ function GenCarousel(callback) {
 
 			});
 
-			$('.flipster').css({
+			$('#'+cid).css({
         'position' : 'absolute',
         'left' : '50%',
         'top' : '50%',
@@ -131,12 +159,15 @@ function GenerateSlide(ul,href,title,image){
 }
 
 function ShowApp(){
-	visible = true;
-	AppWin.show();
-	AppWin.setShowInTaskbar(false);
-	AppWin.focus();
-	AppWin.setShowInTaskbar(false);
-	FadeIn(function(){});
+	InitDisplay(); //Reinit display, sometimes buggy
+	if(AppShowEnabled){
+		visible = true;
+		AppWin.show();
+		AppWin.setShowInTaskbar(false);
+		AppWin.focus();
+		AppWin.setShowInTaskbar(false);
+		FadeIn(function(){});
+	}
 }
 
 function HideApp(){
@@ -166,10 +197,34 @@ function ShowNotification(title,content){
 }
 
 function InitTray(){
+ gui.App.createShortcut(process.env.APPDATA + "\\Microsoft\\Windows\\Start Menu\\Programs\\temp\\kOverlay.lnk"); //It needs to have shortcut to be albe to show notifications (windows 8 and higher)
+
  tray = new gui.Tray({ title: 'Settings', icon: 'icon.png' });
 	tray.on("click",function(){
 		HideApp();
 		SettingsWin.show();
-		SwttingsWin.focus();
+		SettingsWin.focus();
 	});
+}
+
+function RegisterHotKey(){
+	if(shortcut != undefined){
+		gui.App.unregisterGlobalHotKey(shortcut);
+	}
+	var option = {
+		key : settings.shortcut,
+		active : function() {
+			if(visible){
+				HideApp();
+			}else{
+				ShowApp();
+			}
+		},
+		failed : function(msg) {
+			alert(msg);
+		}
+	};
+	shortcut = new gui.Shortcut(option);
+
+	gui.App.registerGlobalHotKey(shortcut);
 }
