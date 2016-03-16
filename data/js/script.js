@@ -33,11 +33,18 @@ $(function(){
 		height: 720,
 		toolbar:false,
 		show:false,
+		frame:false,
+		transparent:true,
 		title: "Settings"
 	});
 	SettingsWin.on('close', function() {
 		SettingsWin.hide();
 	});
+
+	//Hide windows
+	SettingsWin.hide();
+	AppWin.hide();
+
 	//Load files
 	ReloadData();
 	ReloadSettings();
@@ -56,9 +63,8 @@ $(function(){
 	//Register Hotkey
 	RegisterHotKey();
 
-	//GenerateData
+	//Generate data
 	InitDisplay();
-	flaunch = false;
 });
 
 
@@ -74,6 +80,7 @@ function InitDisplay(){
 				HideApp(); //Just 4 to be sure
 				ShowNotification("App started","App is running, press " + settings.shortcut + " to show it");
 			}
+			flaunch = false;
 		}
 	});
 }
@@ -148,7 +155,7 @@ function FadeOut(callback){
 
 
 function GenerateSlide(ul,href,title,image){
-	var li = $('<li><img /><a target="_blank"></a></li>');
+	var li = $('<li><img / onclick="ExecuteCommand()"><a target="_blank" onclick="ExecuteCommand()"></a></li>');
 
 	li.find('a')
 		.attr('href', href)
@@ -227,4 +234,9 @@ function RegisterHotKey(){
 	shortcut = new gui.Shortcut(option);
 
 	gui.App.registerGlobalHotKey(shortcut);
+}
+
+function ExecuteCommand(){
+	//Find command from node
+	//Execute command
 }

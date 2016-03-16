@@ -9,10 +9,17 @@
     <link rel="stylesheet" href="css/settings.css" media="screen" charset="utf-8">
   </head>
   <body>
-
+    <div class="window-drag-region"></div>
     <!-- Header -->
 
     <section class="hero is-info is-left is-bold">
+      <div class="navbar window-title">
+        Settings
+        <!-- Right side -->
+        <div class="navbar-right">
+          <p class="navbar-item"><a class="button is-info title-button" id="windowClose">X</a></p>
+        </div>
+      </div>
       <div class="hero-content">
         <div class="container">
           <p class="title">
@@ -28,13 +35,13 @@
           <div class="container">
             <ul>
               <li class="is-active">
-                <a href="?p=dashboard">Dashboard</a>
+                <a href="#" id="tab1button">Dashboard</a>
               </li>
               <li>
-                <a href="?p=shortcuts">Shortcuts</a>
+                <a href="#" id="tab2button">Shortcuts</a>
               </li>
               <li>
-                <a href="?p=support">Support</a>
+                <a href="#" id="tab3button">Support</a>
               </li>
             </ul>
           </div>
@@ -45,21 +52,37 @@
 
     <!-- Dashboard -->
 
-    <section class="section">
+    <section class="section limited-height custom-scrollbar custom-table custom-active" id="tab1">
       <div class="container">
         <h1 class="title">Dashboard</h1>
-        <h2 class="subtitle">Changes will after save take few seconds to apply</h2>
+        <h2 class="subtitle">Changes may take several seconds to apply</h2>
         <hr>
-
-
         <table class="table">
-
         <tbody id="dashboardTable">
-
         </tbody>
         </table>
-
-
+      </div>
+    </section>
+    <section class="section limited-height custom-scrollbar custom-table" id="tab2">
+      <div class="container">
+        <h1 class="title">Shortcuts</h1>
+        <h2 class="subtitle">Changes may take several seconds to apply</h2>
+        <hr>
+        <table class="table">
+        <tbody id="shortcutsTable">
+        </tbody>
+        </table>
+      </div>
+    </section>
+    <section class="section limited-height custom-scrollbar custom-table" id="tab3">
+      <div class="container">
+        <h1 class="title">Support</h1>
+        <h2 class="subtitle">Feel free to contact me</h2>
+        <hr>
+        <table class="table">
+        <tbody>
+        </tbody>
+        </table>
       </div>
     </section>
     <footer class="footer">

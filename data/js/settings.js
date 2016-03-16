@@ -7,11 +7,16 @@ var data = {
 var aid;
 var avalue;
 var afile;
+var win;
 
 var gui = require('nw.gui');
 var fs = require('fs');
 
+var activeTab = "tab1";
+
 $(function(){
+  win = gui.Window.get();
+  win.setResizable(false);
   $(".appVer").text(gui.App.manifest.version);
   //Load settings file
   data.settings = JSON.parse(fs.readFileSync('../settings.json'));
@@ -36,6 +41,19 @@ $(function(){
   $( "#hmSend" ).click(function() {
     Save($("#hmOut").val());
     $(this).parent().parent().parent().parent().parent().removeClass('is-active');
+  });
+  $("#windowClose").click(function(){
+    win.hide();
+  });
+
+  $("#tab1button").click(function(){
+    SwitchTo("tab1");
+  });
+  $("#tab2button").click(function(){
+    SwitchTo("tab2");
+  });
+  $("#tab3button").click(function(){
+    SwitchTo("tab3");
   });
 
  var dashboardTable = $("#dashboardTable");
@@ -98,4 +116,13 @@ function Save(val){
   }
 
   fs.writeFileSync("../"+afile+".json",JSON.stringify(data[afile]));
+}
+
+
+function SwitchTo(tab){
+  $("#" + activeTab).removeClass("custom-active");
+  $("#" + activeTab + "button").parent().removeClass("is-active");
+  $("#" + tab).addClass("custom-active");
+  $("#" + tab + "button").parent().addClass("is-active");
+  activeTab = tab;
 }

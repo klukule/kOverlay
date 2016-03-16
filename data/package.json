@@ -1,24 +1,25 @@
 {
-  "name": "nw-app",
+  "name": "kOverlay",
   "version": "1.0.1",
   "description": "",
   "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Lukáš Jech",
   "window": {
-    "toolbar":false,
-    "frame":false,
+    "toolbar": false,
+    "frame": false,
     "width": 10000,
     "height": 10000,
-    "transparent":true,
-    "show_in_taskbar":false,
+    "transparent": true,
+    "show_in_taskbar": false,
     "show": false
   },
   "license": "ISC",
   "dependencies": {
-    "pretty-bytes": "^1.0.2"
+    "pretty-bytes": "^1.0.2",
+    "shelljs": "^0.6.0"
   },
   "app-id": "cz.klukule.app.overlay"
 }
