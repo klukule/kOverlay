@@ -15,8 +15,6 @@ var AppShowEnabled = false;
 var visible = false;
 var flaunch = true;
 
-require('shelljs');
-
 $(function(){
 	$('html').css("display","none");
 
@@ -33,7 +31,7 @@ $(function(){
 		position: 'center',
 		width: 1280,
 		height: 720,
-		toolbar:true,
+		toolbar:false,
 		show:false,
 		frame:false,
 		transparent:true,
@@ -256,6 +254,9 @@ function ExecuteCommand(data){
 		ModalLaunching();
 	}
 	gui.Shell.openItem(data[2]);
+	if(settings.closeafterlaunch){
+		HideApp();
+	}
 }
 
 function ExecuteCommandKeyboard(){

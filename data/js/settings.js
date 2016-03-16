@@ -10,10 +10,10 @@ var afile;
 var win;
 
 var gui = require('nw.gui');
-var fs = require('fs');
+var fs = require('fs-extra');
 
 var activeTab = "tab1";
-
+var activeItem = -1;
 $(function(){
   win = gui.Window.get();
   win.setResizable(false);
@@ -56,18 +56,24 @@ $(function(){
     SwitchTo("tab3");
   });
 
+  $("#iconModalSend").click(function(){
+    ParseApp();
+  });
+
  GenTables();
 
 });
 function GenTables(){
   var dashboardTable = $("#dashboardTable");
   dashboardTable.html("");
+
   AddElement(dashboardTable,"Background enabled"         ,data.settings["background"]  ,"background" ,"bool"   , "settings");
   AddElement(dashboardTable,"Background color 1"         ,data.settings["bg1"]         ,"bg1"        ,"color"  , "settings");
   AddElement(dashboardTable,"Background color 2"         ,data.settings["bg2"]         ,"bg2"        ,"color"  , "settings");
   AddElement(dashboardTable,"Show overlay hotkey"        ,data.settings["shortcut"]    ,"shortcut"   ,"hotkey" , "settings");
   AddElement(dashboardTable,"Show overlay after startup" ,data.settings["showatstart"] ,"showatstart","bool"   , "settings");
   AddElement(dashboardTable,"Show Loading message"       ,data.settings["loadmessage"] ,"loadmessage","bool"   , "settings");
+  AddElement(dashboardTable,"Close overlay after starting application"       ,data.settings["closeafterlaunch"] ,"closeafterlaunch","bool"   , "settings");
 
   GenIcons();
 }
@@ -76,7 +82,7 @@ function GenIcons(){
   var table = $("#shortcutsTable");
   table.parent().html("<tbody id='shortcutsTable'></tbody>");
   var table = $("#shortcutsTable");
-  $("<thead><tr><th>Add</th><th></th><th></th><th></th><th></th><th class='table-link table-icon'><a href='#' onclick='ShowModal()'><i class='fa fa-plus'></i></a></th></tr>thead>").appendTo(table.parent());
+  $("<thead><tr><th>Add</th><th></th><th></th><th></th><th></th><th class='table-link table-icon'><a href='#' onclick='EditApp(-1)'><i class='fa fa-plus'></i></a></th></tr>thead>").appendTo(table.parent());
   for(var i in data.data){
     var comp = "<tr>";
     comp +="<td>"+data.data[i].Name+"</td>";
@@ -91,15 +97,52 @@ function GenIcons(){
     }else{
       comp += "<td></td>";
     }
-    comp += "<td class='table-link table-icon'><a href='#' onclick='ModalEdit("+i+")'><i class='fa fa-pencil'></i></a></td>";
+    comp += "<td class='table-link table-icon'><a href='#' onclick='EditApp("+i+")'><i class='fa fa-pencil'></i></a></td>";
     comp += "<td class='table-link table-icon is-alert'><a href='#' onclick='Remove("+i+")'><i class='fa fa-times'></i></a></td>";
     comp += "</tr>";
     var tr = $(comp);
     tr.appendTo(table);
   }
-  $("<tfoot><tr><th>Add</th><th></th><th></th><th></th><th></th><th class='table-link table-icon'><a href='#' onclick='ShowModal()'><i class='fa fa-plus'></i></a></th></tr>tfoot>").appendTo(table.parent());
+  $("<tfoot><tr><th>Add</th><th></th><th></th><th></th><th></th><th class='table-link table-icon'><a href='#' onclick='EditApp(-1)'><i class='fa fa-plus'></i></a></th></tr>tfoot>").appendTo(table.parent());
 
 }
+
+function EditApp(index){
+  activeItem = index;
+  if(index == -1){
+    $("#appName").val("");
+    $("#command").val("");
+    $("#thumbnailUrl").val("");
+  }else{
+    $("#appName").val(data.data[index].Name);
+    $("#command").val(data.data[index].Command);
+    $("#thumbnailUrl").val(data.data[index].Image);
+  }
+  $("#iconModal").addClass("is-active");
+}
+
+function ParseApp(){
+  $("#iconModal").removeClass("is-active");
+  var an = $("#appName").val();
+  var ac = $("#command").val();
+  var ai = $("#thumbnailUrl").val();
+  if(activeItem == -1){
+    CopyImage(ai);
+    var dat = {"Name":an,"Command":ac,"Image":"../icons/"+ai.split('\\').pop().split('/').pop()};
+    data.data.push(dat);
+  }else{
+    if(!ai.startsWith("../")){
+      fs.unlink(data.data[activeItem].Image);
+      CopyImage(ai);
+    }
+    data.data[activeItem].Name = an;
+    data.data[activeItem].Command = ac;
+    data.data[activeItem].Image = "../icons/"+ai.split('\\').pop().split('/').pop();
+  }
+  SaveData();
+  GenTables();
+}
+
 function MoveDown(index){
   var temp = data.data[index];
   data.data[index] = data.data[index+1];
@@ -116,6 +159,7 @@ function MoveUp(index){
 }
 
 function Remove(index){
+  fs.unlink(data.data[index].Image);
   data.data.splice(index,1);
   SaveData();
   GenTables();
@@ -123,6 +167,11 @@ function Remove(index){
 
 function SaveData(){
   fs.writeFileSync("../data.json",JSON.stringify(data.data));
+}
+
+function CopyImage(source){
+  var filename = source.split('\\').pop().split('/').pop();
+  fs.copySync(source, "../icons/"+filename);
 
 }
 
