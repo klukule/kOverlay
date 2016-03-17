@@ -5,14 +5,9 @@ What actualy is kOverlay?
 
  - kOverlay is simple to use tool that allows you to have your shortcuts as far as keyboard combination press goes
 
-----------
-
 Images
 ------------
 To be added
-
-----------
-
 
 TODO
 -------------
