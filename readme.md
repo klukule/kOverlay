@@ -16,9 +16,8 @@ To be added
 
 TODO
 -------------
-> **release-1.1.x:**
-> - Add button to close overlay (completly, oposing to Alt+F4)
-> - Add "Launch after start" button to start overlay automaticaly
+> **release-1.0.x:**
+> - Add "Launch after start" button to start overlay automatically
 
 Write me any ideas, i'l try to add them
 

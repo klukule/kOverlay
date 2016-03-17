@@ -75,6 +75,14 @@ $(function(){
 	$(document).on('click', ".flip-current", function(e) {
 		ExecuteCommand($(this).data("IconInfo"));
 	});
+	$("#buttonSettings").on("click",function(){
+		HideApp();
+		SettingsWin.show();
+		SettingsWin.focus();
+	});
+	$("#buttonClose").on("click",function(){
+		gui.App.quit();
+	});
 });
 
 
@@ -104,8 +112,12 @@ function ReloadSettings() {
 	settings = JSON.parse(fs.readFileSync('../settings.json'));
 	if(settings.background){
 		$('html').css("background","radial-gradient(ellipse at center, "+settings.bg1+" 0%,"+settings.bg2 + " 100%");
+		$("#buttonSettings").removeClass("custom-nobg");
+		$("#buttonClose").removeClass("custom-nobg");
 	}else{
 		$('html').css("background","rgba(0,0,0,0)"); //Transparent background
+		$("#buttonSettings").addClass("custom-nobg");
+		$("#buttonClose").addClass("custom-nobg");
 
 	}
 	RegisterHotKey();
@@ -149,7 +161,7 @@ function GenCarousel(cid, callback) {
 			});
 		}else{
 			//Display message
-			var display = $('<div class="is-text-centered custom-overlay" id="overlayNoShortcuts"><div class="flex-container"><div><h1 class="title is-2 custom-modal-title">No shortcuts here</h1><h2 class="subtitle is-4 custom-modal-subtitle" id="modalAppName">Just press '+settings.shortcut+' and add some</h2></div></div></div>');
+			var display = $('<div class="is-text-centered custom-overlay" id="overlayNoShortcuts"><div class="flex-container"><div><h1 class="title is-2 custom-modal-title">No shortcuts here</h1><h2 class="subtitle is-4 custom-modal-subtitle" id="modalAppName">Just open settings and add some</h2></div></div></div>');
 			display.appendTo($('body'));
 			callback();
 		}
