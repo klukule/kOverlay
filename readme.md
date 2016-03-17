@@ -11,8 +11,11 @@ To be added
 
 TODO
 -------------
-> **release-1.0.x:**
+> **[deprecated] release-1.0.x:**
 > - Add "Launch after start" button to start overlay automatically
+>
+> **[WIP] release-1.1.x:**
+> - Convert nw.js 0.12 to 0.13
 
 Write me any ideas, i'l try to add them
 
