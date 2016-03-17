@@ -1,8 +1,0 @@
-release-1.0.0_17.03.16
-* First release
-+ overlay
-+ settings
-
-release-1.0.1_17.03.16
-+ close and settings button added to overlay
-+ tooltips for close and settings button
