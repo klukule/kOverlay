@@ -230,3 +230,58 @@ function SwitchTo(tab){
   $("#" + tab + "button").parent().addClass("is-active");
   activeTab = tab;
 }
+
+function SubmitForm(){
+  var sender = $("#contactSender").val();
+  var msg = $("#contactMessage").val();
+  if(sender.length < 8 ){ //Im sorry for possible emails less than 8 chars long (highly unpropable :D)
+    DisplayMessage($("#messageHolder"),"Field email required & must be longer than 8 characters","danger");
+    return;
+  }
+  if(msg.length < 20){
+    DisplayMessage($("#messageHolder"),"Field message required & must be longer than 20 characters","danger");
+    return;
+  }
+  $.ajax({
+    type: 'POST',
+    url: 'http://static.moow.info/koverlay/Contact.php',
+    data: {'sender': sender,'message':msg},
+    success: function(msg) {
+      DisplayMessage($("#messageHolder"),"Message successfully sent","success");
+      $("#contactSender").val("");
+      $("#contactMessage").val("");
+    },
+    error: function(){
+      DisplayMessage($("#messageHolder"),"Try again, or contact me using methods above","danger");
+    }
+  });
+
+}
+
+function DisplayMessage(where,what,type){
+  var typeClass = "";
+  switch (type) {
+    case "primary":
+      typeClass = "is-primary";
+      break;
+    case "info":
+      typeClass = "is-info";
+      break;
+    case "success":
+      typeClass = "is-success";
+      break;
+    case "warning":
+      typeClass = "is-warning";
+      break;
+    case "danger":
+      typeClass = "is-danger";
+      break;
+    default:
+      break;
+  }
+  $(where).append("<div class='notification "+typeClass+"'>"+what+"<button class='delete'></button></div>")
+  //Reapply onClick event
+  $('.delete').click(function() {
+    $(this).parent().remove();
+  });
+}

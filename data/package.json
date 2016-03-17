@@ -1,6 +1,6 @@
 {
   "name": "kOverlay",
-  "version": "dev-1.0.2",
+  "version": "dev-1.0.3",
   "description": "",
   "main": "index.html",
   "scripts": {
@@ -14,7 +14,8 @@
     "height": 10000,
     "transparent": true,
     "show_in_taskbar": false,
-    "show": false
+    "show": false,
+    "resizable":false
   },
   "license": "ISC",
   "dependencies": {

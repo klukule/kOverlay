@@ -23,6 +23,7 @@ $(function(){
 	AppWin.setAlwaysOnTop(true);
 	AppWin.moveTo(0,0);
 	AppWin.resizeTo(window.screen.width,window.screen.height);
+	AppWin.setResizable(false);
 	AppWin.on('close',function(){
 		gui.App.quit();
 	});
@@ -113,39 +114,45 @@ function ReloadSettings() {
 function GenCarousel(cid, callback) {
 		$("#container").html('<div class="flipster" id="'+cid+'"><ul></ul></div>');
 		var ul = $('#'+cid+' ul');
-
+		$("#overlayNoShortcuts").remove();
 		for (var i = 0; i < data.length; i++) {
 			var item = data[i];
 			GenerateSlide(ul,item.Command,item.Name,item.Image,item.Command);
 
 		}
-		// $('.flipser').css("height",$('html').height());
-		ul.waitForImages(function() {
-			$('html').css("display","block");
-			$('#'+cid).flipster({
-				style: 'carousel',
-				touch: true,
-				start:0
+		if(data.length > 0){
+			ul.waitForImages(function() {
+				$('html').css("display","block");
+				$('#'+cid).flipster({
+					style: 'carousel',
+					touch: true,
+					start:0
+				});
+
+				$('#'+cid).on('click', 'a', function (e) {
+
+					e.preventDefault();
+
+					// Open URL with default browser.
+					gui.Shell.openExternal(e.target.href);
+
+				});
+
+				$('#'+cid).css({
+	        'position' : 'absolute',
+	        'left' : '50%',
+	        'top' : '50%',
+	        'margin-left' : function() {return -$(this).outerWidth()/2},
+	        'margin-top' : function() {return -$(this).outerHeight()/2}
+		    });
+				callback();
 			});
-
-			$('#'+cid).on('click', 'a', function (e) {
-
-				e.preventDefault();
-
-				// Open URL with default browser.
-				gui.Shell.openExternal(e.target.href);
-
-			});
-
-			$('#'+cid).css({
-        'position' : 'absolute',
-        'left' : '50%',
-        'top' : '50%',
-        'margin-left' : function() {return -$(this).outerWidth()/2},
-        'margin-top' : function() {return -$(this).outerHeight()/2}
-	    });
+		}else{
+			//Display message
+			var display = $('<div class="is-text-centered custom-overlay" id="overlayNoShortcuts"><div class="flex-container"><div><h1 class="title is-2 custom-modal-title">No shortcuts here</h1><h2 class="subtitle is-4 custom-modal-subtitle" id="modalAppName">Just press '+settings.shortcut+' and add some</h2></div></div></div>');
+			display.appendTo($('body'));
 			callback();
-		});
+		}
 
 }
 
