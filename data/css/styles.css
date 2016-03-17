@@ -175,3 +175,16 @@ a, a:visited, a:hover{
 .custom-nobg{
 	background:rgba(0,0,0,0.5);
 }
+
+.custom-tooltip {
+	border-radius: 5px;
+	border: 0px solid #000;
+	background: #4c4c4c;
+	color: #fff;
+}
+.custom-tooltip .tooltipster-content {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	line-height: 16px;
+	padding: 8px 10px;
+}

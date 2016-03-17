@@ -8,13 +8,14 @@
 	<title>Test</title>
 	<link rel="stylesheet" href="bower-components/bulma-0.0.16/css/bulma.min.css" media="screen" charset="utf-8">
 	<link rel="stylesheet" href="bower-components/font-awesome-4.5.0/css/font-awesome.min.css" media="screen" charset="utf-8">
-	<link rel="stylesheet" href="./css/jquery.flipster.min.css">
-	<link rel="stylesheet" href="./css/styles.css">
+	<link rel="stylesheet" href="css/jquery.flipster.min.css">
+	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="bower-components/tooltipster/css/tooltipster.css" />
 
 </head>
 <body>
-	<button class="custom-close" id="buttonClose"></button>
-	<button class="custom-settings" id="buttonSettings"></button>
+	<button class="custom-close tooltip" id="buttonClose" title="Quit application"></button>
+	<button class="custom-settings tooltip" id="buttonSettings" title="Open settings"></button>
 
 	<div id="container"></div>
 	<div class="modal" id="launchingModal">
@@ -37,8 +38,9 @@
 		</div>
 	</div>
 </body>
-<script src="./js/jquery.min.js"></script>
-<script src="./js/jquery.flipster.min.js"></script>
-<script src="./js/jquery.waitforimages.min.js"></script>
-<script src="./js/script.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="bower-components/tooltipster/js/jquery.tooltipster.min.js"></script>
+<script src="js/jquery.flipster.min.js"></script>
+<script src="js/jquery.waitforimages.min.js"></script>
+<script src="js/script.js"></script>
 </html>

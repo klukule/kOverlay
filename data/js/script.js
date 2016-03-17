@@ -17,7 +17,13 @@ var flaunch = true;
 
 $(function(){
 	$('html').css("display","none");
-
+	$('.tooltip').tooltipster({
+   animation: 'fade',
+   delay: 100,
+   theme: 'custom-tooltip',
+   trigger: 'hover',
+	 position: 'left'
+});
 	//Setup window
 	AppWin.setShowInTaskbar(false);
 	AppWin.setAlwaysOnTop(true);
