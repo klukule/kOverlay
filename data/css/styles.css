@@ -87,3 +87,104 @@ a, a:visited, a:hover{
     justify-content: center;
 		background: radial-gradient(ellipse at center, rgba(0,0,0,0) 30%,rgba(0,0,0,0.5) 100%);
 }
+
+.custom-close,.custom-settings {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: rgba(0, 0, 0, 0.2);
+  border: none;
+  border-radius: 290486px;
+  cursor: pointer;
+  display: inline-block;
+  height: 24px;
+  position: relative;
+  vertical-align: top;
+  width: 24px;
+}
+
+.custom-close:before, .custom-close:after {
+  background: white;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 50%;
+  margin-left: -25%;
+  margin-top: -1px;
+  position: absolute;
+  top: 50%;
+  width: 50%;
+}
+
+.custom-close:before {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+.custom-close:after {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+.custom-close {
+  background: none;
+  height: 40px;
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  width: 40px;
+	z-index: 10;
+}
+.custom-settings {
+  background: none;
+  height: 40px;
+  position: fixed;
+  right: 70px;
+  top: 20px;
+  width: 40px;
+	z-index: 10;
+	display: inline-block;
+	font: normal normal normal 14px/1 FontAwesome;
+	font-size: inherit;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+.custom-settings:before, .custom-settings:after {
+	background: none;
+	color:white;
+	content: "\f013";
+	font-size: 1.33333333em;
+	line-height: 0.75em;
+	vertical-align: -15%;
+  display: block;
+  left: 50%;
+  margin-left: -21%;
+  margin-top: -15%;
+  position: absolute;
+  top: 50%;
+}
+.custom-close:hover,.custom-settings:hover {
+  background: #ed6c63;
+}
+
+.custom-nobg{
+	background:rgba(0,0,0,0.5);
+}
+
+.custom-tooltip {
+	border-radius: 5px;
+	border: 0px solid #000;
+	background: #4c4c4c;
+	color: #fff;
+}
+.custom-tooltip .tooltipster-content {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	line-height: 16px;
+	padding: 8px 10px;
+}
