@@ -18,10 +18,22 @@ $(function(){
 function Initialize(){
   UpdateSettings();
   UpdateData();
+  ActivateFuncions();
+}
+
+function ActivateFuncions(){
+  $('.tooltip').tooltipster({
+    animation: 'fade',
+    delay: 100,
+    theme: 'custom-tooltip',
+    trigger: 'hover',
+    position: 'left'
+  });
 }
 
 function UpdateSettings(){
   RegisterGlobalHotKey(Data.settings.shortcut);
+  OnGlobalHotKey = GlobalHotkeyCallback; //Hook event to my function
   if(Data.settings.background){
     $('html').css("background","radial-gradient(ellipse at center, "+Data.settings.bg1+" 0%,"+Data.settings.bg2 + " 100%");
     $("#buttonSettings").removeClass("custom-nobg");
@@ -31,6 +43,8 @@ function UpdateSettings(){
   	$("#buttonSettings").addClass("custom-nobg");
   	$("#buttonClose").addClass("custom-nobg");
   }
+
+  //TODO: Open After launch
 }
 
 function UpdateData(){
@@ -38,9 +52,21 @@ function UpdateData(){
 }
 
 function ShowWindow(){
-
+  //TODO: Open window with face in animation & regen content
+  GenerateCarousel();
 }
 
 function HideWindow(){
-
+  //TODO: Close window with fade off animation
+  $("#container").html(""); //Clear carousel, jsut to be sure
+}
+var open = false;
+function GlobalHotkeyCallback(){
+  if(open){
+    HideWindow();
+  }else{
+    ShowWindow();
+  }
+  open = !open;
+  //TODO: Add proper open/close
 }

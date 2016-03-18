@@ -15,8 +15,8 @@ InitApp();
 // Functions - Global
 //*********************************
 function InitApp(){
-  SetupOverlay(function(){OpenOverlay();});
-  SetupSettings(function(){});
+  SetupOverlay(function(){}); //Callback not used
+  SetupSettings(function(){}); //Callback not used
 }
 
 //*********************************
