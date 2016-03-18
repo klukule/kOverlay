@@ -1,0 +1,7 @@
+[0318/111903:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0318/111903:ERROR:image_metadata_extractor.cc(114)] Couldn't load libexif. 126
+[0318/112322:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0318/112322:ERROR:image_metadata_extractor.cc(114)] Couldn't load libexif. 126
+[0318/112352:ERROR:image_metadata_extractor.cc(114)] Couldn't load libexif. 126
+[0318/112438:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0318/112538:ERROR:image_metadata_extractor.cc(114)] Couldn't load libexif. 126
