@@ -22,3 +22,15 @@ function RegisterGlobalHotKey(hotkeyString){
 function UnregisterGlobalHotKey(){
   nw.App.unregisterGlobalHotKey(Hotkey);
 }
+
+function RegisterKey(id,target,callback){
+  if(target == undefined){
+    target = document;
+  }
+  console.log("Creating keypress for target "+target+" and key "+id);
+  $(target).keypress(function(e) {
+    if(e.which == id) {
+        callback();
+    }
+	});
+}
