@@ -1,7 +1,5 @@
 OVERLAY
 * Desktop notifications
-* In-window keyboard hooks (configue only)
-* Launching message
 
 SETTINGS
 * recreate

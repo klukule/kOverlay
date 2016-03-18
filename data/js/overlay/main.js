@@ -2,6 +2,7 @@
 // Vars
 //*********************************
 var OverlayVisible = false;
+var path = require('path');
 // var Initialized = false;
 //*********************************
 // Entry Point
@@ -21,23 +22,34 @@ function Initialize(){
   UpdateSettings();
   UpdateData();
   ActivateFuncions();
-  ActivateClickCallbacks();
+  RegisterClickCallbacks();
+  RegisterLocallHotkeys();
   if(Data.settings.showatstart){ //Just need to run once so it is here and not in UpdateSettings();
     ShowWindow();
   }
 }
 
-function ActivateClickCallbacks(){
+function RegisterLocallHotkeys(){
+  RegisterKey(13,document,function(){
+    ExecCommand($(".flip-current").data("IconInfo"));
+  });
+}
 
+function RegisterClickCallbacks(){
+  /*     RIGHT TOP BUTTONS WITH TOOLTIPS     */
+    $("#buttonSettings").on("click",function(){
+  		HideWindow();
+  		OpenSettings();
+  	});
+  	$("#buttonClose").on("click",function(){
+  		nw.App.quit();
+  	});
 
-/*     RIGHT TOP BUTTONS WITH TOOLTIPS     */
-  $("#buttonSettings").on("click",function(){
-		HideWindow();
-		OpenSettings();
+/*     Carousel click     */
+  $(document).on('click', ".flip-current", function(e) {
+		ExecCommand($(this).data("IconInfo"));
 	});
-	$("#buttonClose").on("click",function(){
-		nw.App.quit();
-	});
+
 }
 
 function ActivateFuncions(){
@@ -94,5 +106,44 @@ function GlobalHotkeyCallback(){
     HideWindow();
   }else{
     ShowWindow();
+  }
+}
+
+function ExecCommand(data){
+  console.log("Executing " + data[0]);
+  nw.Shell.openItem(data[2]);
+  if(Data.settings.closeafterlaunch){
+    HideWindow();
+  }else{
+    ShowMessageLaunching(data);
+  }
+}
+
+function ShowMessageLaunching(data){
+  if(Data.settings.loadmessage){
+    var name = data[0];
+    var img = data[1];
+    var imgsrc = "file://" + path.join(__dirname,img).replace(/\\/g,"/");
+    $('#modalImg').attr('src',imgsrc);
+    $("#modalAppName").text(name);
+    if(!Data.settings.background){
+    		$("#lmb").css("display","none");
+    	}else{
+    		$("#lmb").css("display","block");
+    	}
+     $("#launchingModal").css("opacity",0);
+    	$('#launchingModal').addClass(function(){
+    		$('#launchingModal').animate({opacity: 1}, 'slow');
+    		return "is-active";
+    	});
+
+
+    	setTimeout(function(){
+    		$('#launchingModal').animate({opacity: 0}, 'slow',function(){
+    			$('#launchingModal').removeClass("is-active");
+    			Window.focus();
+    		});
+    	},3000);
+
   }
 }
