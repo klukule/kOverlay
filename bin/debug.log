@@ -23,3 +23,7 @@
 [0318/233053:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
 [0318/233120:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
 [0318/233156:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0318/234400:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0318/234426:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0318/234432:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0318/234438:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/

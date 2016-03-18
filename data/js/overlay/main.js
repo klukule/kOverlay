@@ -26,6 +26,8 @@ function Initialize(){
   RegisterLocallHotkeys();
   if(Data.settings.showatstart){ //Just need to run once so it is here and not in UpdateSettings();
     ShowWindow();
+  }else{
+    ShowDesktopNotification("Application started","Press Ctrl+G to open overlay"); //When we dont show window after startup we atleast show some notification so user does know that app is running
   }
 }
 
