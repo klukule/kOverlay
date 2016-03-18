@@ -22,19 +22,22 @@ function InitApp(){
 //*********************************
 function SetupOverlay(callback){
 
-	Overlay = nw.Window.open ('overlay.html', {
+	nw.Window.open ('overlay.html', {
 		position: 'center',
 		width: 1920,
 		height: 1080,
-		 show:false,
+		show:false,
 		frame:false,
 		transparent:true,
 		title: "Overlay"
-	});
-	Overlay.on('close', function() {
-		Overlay.hide();
-	});
-  Overlay.hide(); //Hide on init :)
+	},function(win){
+    Overlay.on('close', function() {
+  		Overlay.hide();
+  	});
+    Overlay.hide(); //Hide on init :)
+    Overlay = win;
+  });
+
 }
 
 function OpenOverlay(callback){

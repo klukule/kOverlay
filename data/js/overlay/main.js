@@ -12,27 +12,31 @@ $(function(){
    Load("../data.json");
    WatchFile("../settings.json",function(){Load("../settings.json");UpdateSettings();});
    WatchFile("../data.json",function(){Load("../data.json");UpdateData();});
+   Window.showDevTools();
    Initialize();
 });
 
 function Initialize(){
+  SetupSettings();
   UpdateSettings();
   UpdateData();
   ActivateFuncions();
   ActivateClickCallbacks();
+  if(Data.settings.showatstart){ //Just need to run once so it is here and not in UpdateSettings();
+    ShowWindow();
+  }
 }
 
 function ActivateClickCallbacks(){
 
 
-/*     RIGHT TOP BUTTONS WITH TOOLTIPS     */  
+/*     RIGHT TOP BUTTONS WITH TOOLTIPS     */
   $("#buttonSettings").on("click",function(){
 		HideWindow();
-		//SettingsWin.show();
-		//SettingsWin.focus();
+		OpenSettings();
 	});
 	$("#buttonClose").on("click",function(){
-		nw.App.quit(); //Close whole application
+		nw.App.quit();
 	});
 }
 
@@ -58,8 +62,6 @@ function UpdateSettings(){
   	$("#buttonSettings").addClass("custom-nobg");
   	$("#buttonClose").addClass("custom-nobg");
   }
-
-  //TODO: Open After launch
 }
 
 function UpdateData(){
@@ -74,6 +76,8 @@ function ShowWindow(){
   Window.focus();
   Window.setShowInTaskbar(false);
   FadeIn(function(){});
+  OverlayVisible = true;
+
 }
 
 function HideWindow(){
@@ -82,6 +86,7 @@ function HideWindow(){
     Window.hide();
   });
   $("#container").html(""); //Clear carousel, jsut to be sure
+  OverlayVisible = false;
 }
 
 function GlobalHotkeyCallback(){
@@ -90,5 +95,4 @@ function GlobalHotkeyCallback(){
   }else{
     ShowWindow();
   }
-  OverlayVisible = !OverlayVisible;
 }

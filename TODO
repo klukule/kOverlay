@@ -1,9 +1,6 @@
 OVERLAY
 * Desktop notifications
-* Fix background
 * In-window keyboard hooks (configue only)
-* Fade-in/out animations
-* Show/hide app
 * Launching message
 
 SETTINGS
