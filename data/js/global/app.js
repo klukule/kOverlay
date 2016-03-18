@@ -19,19 +19,11 @@ function InitApp(){
   SetupSettings(function(){});
 }
 
-
-
-
-
-
-
-
-
-
 //*********************************
 // Functions - Overlay
 //*********************************
 function SetupOverlay(callback){
+
 	Overlay = nw.Window.open ('overlay.html', {
 		position: 'center',
 		width: 1920,
@@ -69,6 +61,7 @@ function SetupSettings(callback){
 		Settings.hide();
 	});
   Settings.hide(); //Hide on init :)
+	Settings.setResizable(false);
 }
 
 function OpenSettings(callback){

@@ -1,30 +1,16 @@
-[0318/150211:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
-[0318/150242:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
-[0318/150856:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
-[0318/150914:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
-[0318/151028:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
-[0318/151033:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
-[0318/151054:INFO:nw_package.cc(175)] nw.exe ../data/
-[0318/151103:INFO:nw_package.cc(175)] nw.exe ../data/
-[0318/151112:ERROR:registration_protocol_win.cc(53)] CreateFile: The system cannot find the file specified. (0x2)
-[0318/151210:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
-[0318/151248:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
-[0318/151250:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
-[0318/151304:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
-[0318/151324:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
-[0318/151722:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
-[0318/151839:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
-[0318/152007:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
-[0318/152253:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
-[0318/152649:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
-[0318/152936:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
-[0318/153022:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
-[0318/153713:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
-[0318/154657:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
-[0318/155249:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
-[0318/155333:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
-[0318/155500:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
-[0318/155530:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
-[0318/155600:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
-[0318/160027:INFO:nw_package.cc(175)] nw.exe ../data/
-[0318/160311:INFO:nw_package.cc(175)] nw.exe ../data/
+[0318/165332:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0318/165352:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0318/165441:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0318/165526:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0318/165618:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0318/170513:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0318/170540:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0318/170606:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0318/170632:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0318/170643:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0318/170703:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0318/170815:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0318/171043:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0318/171627:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0318/171816:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0318/172032:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/

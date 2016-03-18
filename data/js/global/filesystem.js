@@ -1,52 +1,38 @@
 var fs = require('fs-extra');
 
-function Save(filename,path){
-  var filenameWithoutExtension = filename.substr(0, filename.lastIndexOf('.'));
-  var fileWithPath = "";
-  var fc;
+function Save(filename){
+  var filenameWOpath = filename.substr(filename.lastIndexOf('/'));
+  var filenameWithoutExtension = filenameWOpath.substr(0, filenameWOpath.lastIndexOf('.'));
 
-  if(path != undefined){
-    if(path.endsWith("/") || path.endsWith("\\")){
-      fileWithPath += path;
-    }else{
-      fileWithPath += path + "/";
-    }
-  }
-  fileWithPath += filename;
-
-
-  console.log("Saving file "+fileWithPath);
+  console.log("Saving file "+filename);
 
   try {
-    fs.writeFileSync(fileWithPath,JSON.stringify(Data[filenameWithoutExtension]));
+    fs.writeFileSync(filename,JSON.stringify(Data[filenameWithoutExtension]));
   } catch (e) {
-    console.error("Failed to write file " + fileWithPath + "\n"+e);
+    console.error("Failed to write file " + filename + "\n"+e);
   }
 };
 
 function Load(filename,path){
-  var filenameWithoutExtension = filename.substr(0, filename.lastIndexOf('.'));
-  var fileWithPath = "";
+  var filenameWOpath = filename.substr(filename.lastIndexOf('/')+1);
+  var filenameWithoutExtension = filenameWOpath.substr(0, filenameWOpath.lastIndexOf('.'));
   var fc;
 
-  if(path != undefined){
-    if(path.endsWith("/") || path.endsWith("\\")){
-      fileWithPath += path;
-    }else{
-      fileWithPath += path + "/";
-    }
-  }
-  fileWithPath += filename;
-
-
-  console.log("Loading file "+fileWithPath);
-
   try {
-    fc = JSON.parse(fs.readFileSync(fileWithPath));
+    fc = JSON.parse(fs.readFileSync(filename));
   } catch (e) {
-    console.error("Failed to read file " + fileWithPath + "\n"+e);
+    console.error("Failed to read file " + filename + "\n"+e);
   }
+
+  console.log("Loading file "+filename);
 
   Data[filenameWithoutExtension] = fc;
   return fc;
+}
+
+
+function WatchFile(filename,callback){
+  	fs.watchFile(filename,function(){
+      callback();
+  	});
 }
