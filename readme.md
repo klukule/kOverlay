@@ -16,6 +16,8 @@ TODO
 >
 > **[WIP] release-1.1.x:**
 > - Convert nw.js 0.12 to 0.13
+> - Installer (like atom.io has)
+> - Auto update
 
 Write me any ideas, i'l try to add them
 
