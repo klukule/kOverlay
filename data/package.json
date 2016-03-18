@@ -1,11 +1,7 @@
 {
   "name": "kOverlay",
   "version": "release-1.0.1_17.03.16",
-  "description": "",
-  "main": "index.html",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "main": "js/global/app.js",
   "author": "Lukáš Jech",
   "window": {
     "frame": false,
@@ -14,12 +10,10 @@
     "transparent": true,
     "show_in_taskbar": false,
     "show": false,
-    "resizable":false
+    "resizable": false
   },
-  "license": "ISC",
   "dependencies": {
-    "fs-extra": "^0.26.7",
-    "pretty-bytes": "^1.0.2"
+    "fs-extra": "^0.26.7"
   },
   "app-id": "cz.klukule.app.overlay"
 }
