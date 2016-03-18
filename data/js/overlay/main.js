@@ -2,12 +2,12 @@
 // Vars
 //*********************************
 var OverlayVisible = false;
-var Initialized = false;
+// var Initialized = false;
 //*********************************
 // Entry Point
 //*********************************
 $(function(){
-  //  $('html').css("display","none");
+   $('html').css("display","none");
    Load("../settings.json");
    Load("../data.json");
    WatchFile("../settings.json",function(){Load("../settings.json");UpdateSettings();});
@@ -19,6 +19,21 @@ function Initialize(){
   UpdateSettings();
   UpdateData();
   ActivateFuncions();
+  ActivateClickCallbacks();
+}
+
+function ActivateClickCallbacks(){
+
+
+/*     RIGHT TOP BUTTONS WITH TOOLTIPS     */  
+  $("#buttonSettings").on("click",function(){
+		HideWindow();
+		//SettingsWin.show();
+		//SettingsWin.focus();
+	});
+	$("#buttonClose").on("click",function(){
+		nw.App.quit(); //Close whole application
+	});
 }
 
 function ActivateFuncions(){
@@ -49,24 +64,31 @@ function UpdateSettings(){
 
 function UpdateData(){
   GenerateCarousel();
+
 }
 
 function ShowWindow(){
-  //TODO: Open window with face in animation & regen content
   GenerateCarousel();
+  Window.show();
+  Window.setShowInTaskbar(false);
+  Window.focus();
+  Window.setShowInTaskbar(false);
+  FadeIn(function(){});
 }
 
 function HideWindow(){
-  //TODO: Close window with fade off animation
+  FadeOut(function(){
+    visible = false;
+    Window.hide();
+  });
   $("#container").html(""); //Clear carousel, jsut to be sure
 }
-var open = false;
+
 function GlobalHotkeyCallback(){
-  if(open){
+  if(OverlayVisible){
     HideWindow();
   }else{
     ShowWindow();
   }
-  open = !open;
-  //TODO: Add proper open/close
+  OverlayVisible = !OverlayVisible;
 }
