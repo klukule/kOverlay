@@ -1,1 +1,4 @@
-[]
+[{"Name":"Counter Strike : Global offensive","Command":"csgo.exe","Image":"../icons/csgo.jpg"},
+  {"Name":"Civilization V","Command":"civ5-launchaer.exe","Image":"../icons/civ5.jpg"},
+  {"Name":"Autodesk 3ds max 2016","Command":"civ5-launchaer.exe","Image":"../icons/3dsmax.png"},
+  {"Name":"Autodesk Maya 2016","Command":"civ5-launchaer.exe","Image":"../icons/maya.png"}]
