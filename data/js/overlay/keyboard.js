@@ -1,14 +1,24 @@
-var ShortcutListner;
-var Shortcut;
+var OnGlobalHotKey;
+var Hotkey;
 
-function RegisterShortcut(shortcut){
-  if(Shortcut != undefined){
-    UnregisterShortcut();
+function RegisterGlobalHotKey(hotkeyString){
+  if(Hotkey != undefined){
+    UnregisterGlobalHotKey();
   }
+  var option = {
+		key : hotkeyString,
+		active : function() {
+			OnGlobalHotKey();
+		},
+		failed : function(msg) {
+			alert(msg);
+		}
+	};
+	 Hotkey = new nw.Shortcut(option);
 
-
+	nw.App.registerGlobalHotKey(Hotkey);
 }
 
-function UnregisterShortcut(){
-
+function UnregisterGlobalHotKey(){
+  nw.App.unregisterGlobalHotKey(Hotkey);
 }
