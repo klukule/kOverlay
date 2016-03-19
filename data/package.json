@@ -1,6 +1,6 @@
 {
   "name": "kOverlay",
-  "version": "release-1.0.1_17.03.16",
+  "version": "dev-nw13-1.1.0-prototype",
   "main": "js/global/app.js",
   "author": "Lukáš Jech",
   "window": {

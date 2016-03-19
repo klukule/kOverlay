@@ -1,0 +1,32 @@
+*{
+	margin:0;
+	padding:0;
+}
+html{
+  overflow-y: hidden;
+  -webkit-user-select: none;
+}
+
+.window-title{
+  background: rgba(0,0,0,0.3);
+  padding-left: 10px;
+}
+
+.window-drag-region{
+  position:absolute;
+  top:0px;
+  left:0px;
+  right:35px;
+  height: 30px;
+  -webkit-app-region:drag;
+  z-index: 150;
+}
+.title-button{
+  width:30px;
+  height:30px;
+  border-radius: 0;
+  background:#18688E !important;
+}
+.title-button:hover{
+  background:#08425E !important;
+}
