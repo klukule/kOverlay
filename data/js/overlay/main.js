@@ -113,7 +113,7 @@ function GlobalHotkeyCallback(){
 
 function ExecCommand(data){
   console.log("Executing " + data[0]);
-  nw.Shell.openItem(data[2]);
+  nw.Shell.openItem(path.normalize(data[2]));
   if(Data.settings.closeafterlaunch){
     HideWindow();
   }else{
