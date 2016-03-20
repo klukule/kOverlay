@@ -27,3 +27,16 @@
 [0318/234426:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
 [0318/234432:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
 [0318/234438:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0319/231450:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0319/231552:ERROR:image_metadata_extractor.cc(114)] Couldn't load libexif. 126
+[0319/233004:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0319/233021:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0319/233035:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0319/233051:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0319/233114:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0319/233910:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0320/114423:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0320/120930:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0320/120940:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0320/121234:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
+[0320/121433:INFO:nw_package.cc(175)] nw.exe --disable-gpu --force-cpu-draw ../data/
