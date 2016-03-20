@@ -34,23 +34,13 @@
         <nav class="tabs is-boxed">
           <div class="container">
             <ul id="tabMenuContainer">
-              <!-- <li class="is-active">
-                <a href="#" id="tab1button">Dashboard</a>
-              </li>
-              <li>
-                <a href="#" id="tab2button">Shortcuts</a>
-              </li>
-              <li>
-                <a href="#" id="tab3button">Support</a>
-              </li> -->
             </ul>
           </div>
         </nav>
       </div>
     </section>
-<!--
 
-    <section class="section limited-height custom-scrollbar custom-table custom-active" id="tab1">
+    <section class="section custom-scrollbar tab" id="tab1">
       <div class="container">
         <h1 class="title">Dashboard</h1>
         <h2 class="subtitle">Changes may take several seconds to apply</h2>
@@ -61,18 +51,48 @@
         </table>
       </div>
     </section>
-    <section class="section limited-height custom-scrollbar custom-table" id="tab2">
+
+    <section class="section custom-scrollbar tab" id="tab2">
       <div class="container">
         <h1 class="title">Shortcuts</h1>
         <h2 class="subtitle">Changes may take several seconds to apply</h2>
         <hr>
         <table class="table">
+        <thead>
+          <tr>
+            <th>Add</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th class='table-link table-icon'>
+              <a href='#' onclick='EditApp(-1)'>
+                <i class='fa fa-plus'></i>
+              </a>
+            </th>
+          </tr>
+        <thead>
         <tbody id="shortcutsTable">
         </tbody>
+        <tfoot>
+          <tr>
+            <th>Add</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th class='table-link table-icon'>
+              <a href='#' onclick='EditApp(-1)'>
+                <i class='fa fa-plus'></i>
+              </a>
+            </th>
+          </tr>
+        <tfoot>
         </table>
       </div>
     </section>
-    <section class="section limited-height custom-scrollbar custom-table" id="tab3">
+
+    <section class="section custom-scrollbar tab" id="tab3">
       <div class="container">
         <h1 class="title">Support</h1>
         <h2 class="subtitle">Feel free to contact me</h2>
@@ -109,23 +129,25 @@
         <br/>
       </div>
     </section>
-    <footer class="footer">
+
+
+    <footer class="footer is-bottom">
       <div class="container">
         <div class="content is-text-centered">
           <p>
             <strong>kOverlay</strong> by <a href="http://klukule.moowdesign.eu">Lukáš Jech</a>.
           </p>
           <p>
-            <!-- <a class="icon" href="https://github.com/klukule">
+            <a class="icon" href="https://github.com/klukule">
               <i class="fa fa-github"></i>
             </a>
             <a class="icon" href="https://twitter.com/klukulee">
               <i class="fa fa-twitter"></i>
-            </a> -->
-          <!-- </p>
+            </a>
+          </p>
         </div>
       </div>
-    </footer> -->
+    </footer>
 
 
     <!-- Modals -->
@@ -212,6 +234,11 @@
   </body>
   <script src="lib/jquery-2.2.2/js/jquery-2.2.2.min.js"></script>
   <script src="lib/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js" charset="utf-8"></script>
+  <script src="js/global/globals.js" charset="utf-8"></script>
+  <script src="js/global/filesystem.js" charset="utf-8"></script>
+  <script src="js/global/tray.js" charset="utf-8"></script>
+  <script src="js/global/notifications.js" charset="utf-8"></script>
   <script src="js/settings/tabs.js" charset="utf-8"></script>
+  <script src="js/settings/tables.js" charset="utf-8"></script>
   <script src="js/settings/main.js" charset="utf-8"></script>
 </html>

@@ -1,10 +1,11 @@
 var tabs = [];
-function SetupTabs(){
-  AddTab("Dashboard","tab1content",true);
-  AddTab("Shortcuts","tab2content",false);
-  AddTab("Support","tab3content",false);
-  GenTabs();
 
+
+function SetupTabs(){
+  AddTab("Dashboard","tab1",true);
+  AddTab("Shortcuts","tab2",false);
+  AddTab("Support","tab3",false);
+  GenTabs();
 }
 
 function ActivateTab(name){
@@ -24,6 +25,9 @@ function GenTabs(){
     var li = $("<li></li>");
     if(tabs[tab].Active){
       li.addClass("is-active");
+      $("#"+tabs[tab].Target).addClass("tab-active");
+    }else{      
+      $("#"+tabs[tab].Target).removeClass("tab-active");
     }
     li.data("tabInfo",tabs[tab]);
     li.append("<a href='#'>"+tabs[tab].Name+"</a>");
