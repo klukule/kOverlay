@@ -58,8 +58,6 @@ function GenTable(target){
 
 function GenerateItem(tableId,elemId){
   var elem = tables[tableId][elemId];
-  console.log("TEST");
-  console.log(GetIdOfObject(tables[tableId],elemId));
   console.log("Generating item \""+elem.Name+"\"");
   var tr = $("<tr></tr>");
   tr.append("<td>"+elem.Name+"</td>");
@@ -73,18 +71,16 @@ function GenerateItem(tableId,elemId){
 
 function GenerateItemApp(tableId,elemId){
   var elem = tables[tableId][elemId];
+  console.log("Generating item \""+elem.Name+"\"");
   var tr = $("<tr></tr>");
   tr.append("<td>"+elem.Name+"</td>");
   tr.append("<td>"+elem.Value+"</td>");
-  if(GetIdOfObject(tables[tableId],elemId) != 0){
+  if(GetIdOfObject(tables[tableId],elemId) != (GetLengthOfTable(tables[tableId])-1)){
     tr.append("<td class='table-link table-icon'><a href='#' onclick='MoveDown()'><i class='fa fa-arrow-down'></i></a></td>");
   }else{
     tr.append("<td></td>");
   }
-  console.log("Generating "+elem.Name);
-  console.log(GetIdOfObject(tables[tableId],elemId));
-  console.log((GetLengthOfTable(tables[tableId])-1));
-  if(GetIdOfObject(tables[tableId],elemId) != (GetLengthOfTable(tables[tableId])-1)){
+  if(GetIdOfObject(tables[tableId],elemId) != 0){
     tr.append("<td class='table-link table-icon'><a href='#' onclick='MoveUp()'><i class='fa fa-arrow-up'></i></a></td>");
   }else{
     tr.append("<td></td>");

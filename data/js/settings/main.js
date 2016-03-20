@@ -18,6 +18,7 @@ $(function(){
    Load("../data.json");
    WatchFile("../settings.json",function(){Load("../settings.json");SetupTables();});
    WatchFile("../data.json",function(){Load("../data.json");SetupTables();});
+   SetupTables();
 });
 
 function OpenLinkExt(href){

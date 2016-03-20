@@ -1,3 +1,5 @@
+* Remove debug.log after closing :)
+
 OVERLAY
 * Add icon to desktop notification
 * Tray icon
