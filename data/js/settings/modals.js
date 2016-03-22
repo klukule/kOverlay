@@ -1,4 +1,6 @@
 var openedModal = "";
+var path = require("path");
+
 function ConstructModal(fields,target){
   var mid = "Modal-" + (new Date()).getTime();
   var modal = '<div class="modal is-active" id="'+mid+'"><div class="modal-background" onclick="ModalAbort();"></div>';
@@ -31,8 +33,8 @@ function EditItem(target){
     case "app":
       ConstructModal([
         ElementInput("Shortcut name",data.Name,true),
-        ElementFileInput("Select file",data.Image,false),
-        ElementFileInput("Select thumbnail image",data.Image,false),
+        ElementFileInput("Select file",data.Value,true),
+        ElementFileInput("Select thumbnail image",data.Icon,false),
         ElementSend("Save")
       ],data);
       break;
@@ -58,7 +60,7 @@ function EditItem(target){
 function AddApp(){
   ConstructModal([
     ElementInput("Shortcut name","",true),
-    ElementFileInput("Select file","",false),
+    ElementFileInput("Select file","",true),
     ElementFileInput("Select thumbnail image","",false)
   ]);
 }
@@ -89,18 +91,17 @@ function ElementInputWithSend(placeholder,value,editable){
 
 
 function ElementFileInput(placeholder,value,editable){
-  // <p class="control is-grouped">
-  //   <a class="button is-primary" href="javascript:;" style="width: 125px;">
-  //     Choose File...
-  //     <input type="file" style="position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:&quot;progid:DXImageTransform.Microsoft.Alpha(Opacity=0)&quot;;opacity:0;background-color:transparent;color:transparent;" name="file_source" size="50" onchange="$('#thumbnailUrl').val($(this).val());">
-  //   </a>
-  //   <input type="text" class="input is-fullwidth" id="thumbnailUrl" placeholder="Select thumbnail image">
-  // </p>
+  value = path.resolve(__dirname,value);
   var html ="<p class='control is-grouped is-fullwidth is-text-centered'>";
   html+= '<a class="button is-primary" onclick="chooseFile(this)" style="width: 125px;">';
   html+= 'Choose File...';
   html+= '</a>';
-  html+= '<input type="text" class="input is-fullwidth" placeholder="'+placeholder+'">';
+  if(editable){
+    html+= '<input type="text" class="input is-fullwidth" placeholder="'+placeholder+'" value="'+value+'">';
+  }else{
+    html+= '<input type="text" class="input is-fullwidth" placeholder="'+placeholder+'" value="'+value+'" disabled>';
+
+  }
   html+="</p>";
   return html;
 }
