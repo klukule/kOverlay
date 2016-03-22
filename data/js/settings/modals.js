@@ -96,35 +96,55 @@ function ElementFileInput(placeholder,value,editable){
   //   </a>
   //   <input type="text" class="input is-fullwidth" id="thumbnailUrl" placeholder="Select thumbnail image">
   // </p>
-  var html = "";
+  var html ="<p class='control is-grouped is-fullwidth is-text-centered'>";
+  html+= '<a class="button is-primary" onclick="chooseFile(this)" style="width: 125px;">';
+  html+= 'Choose File...';
+  html+= '</a>';
+  html+= '<input type="text" class="input is-fullwidth" placeholder="'+placeholder+'">';
+  html+="</p>";
   return html;
 }
 
+function chooseFile(buttonClicked) {
+  name = "#fileDialog";
+  var chooser = $(name);
+  chooser.unbind('change');
+  chooser.change(function(evt) {
+    $($(buttonClicked).parent().children()[1]).val($(this).val());
+    $(this).val("");
+  });
+
+  chooser.trigger('click');
+}
 function ElementBool(placeholder, value){
-  // <p class="control">
-  //   <span class="select	is-fullwidth">
-  //     <select class="is-fullwidth" id="bmOut">
-  //       <option>true</option>
-  //       <option>false</option>
-  //     </select>
-  //   </span>
-  // </p>
-  var html = "";
+  var html ="<p class='control is-fullwidth is-text-centered'>";
+  html+= "<span class='select	is-fullwidth'>";
+  html+= '<select class="is-fullwidth">';
+  if(value){
+      html+= "<option selected>true</option>";
+      html+= "<option>false</option>";
+  }else{
+    html+= "<option>true</option>";
+    html+= "<option selected>false</option>";
+
+  }
+  html+="</select></span></p>";
+
   return html;
 }
 function ElementBoolWithSend(placeholder, value){
-  // <p class="control is-grouped">
-  //   <span class="select	is-fullwidth">
-  //     <select class="is-fullwidth" id="bmOut">
-  //       <option>true</option>
-  //       <option>false</option>
-  //     </select>
-  //   </span>
-  //   <a class="button is-primary" id="bmSend">
-  //     Save
-  //   </a>
-  // </p>
-  var html = "";
+  var html ="<p class='control is-grouped is-fullwidth is-text-centered'>";
+  html+= "<span class='select	is-fullwidth'>";
+  html+= '<select class="is-fullwidth">';
+  if(value){
+      html+= "<option selected>true</option>";
+      html+= "<option>false</option>";
+  }else{
+    html+= "<option>true</option>";
+    html+= "<option selected>false</option>";
+
+  }
+  html+="</select></span><a class='button is-primary' onclick='ModalSave();'>Save</a></p>";
   return html;
 }
 function ElementColor(placeholder, value){
