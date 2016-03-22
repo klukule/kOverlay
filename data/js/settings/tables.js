@@ -1,4 +1,5 @@
 var tables = {};
+var path = require("path");
 
 function SetupTables(){
   Clear("dashboardTable");
@@ -74,7 +75,7 @@ function GenerateItemApp(tableId,elemId){
   console.log("Generating item \""+elem.Name+"\"");
   var tr = $("<tr></tr>");
   tr.append("<td>"+elem.Name+"</td>");
-  tr.append("<td>"+elem.Value+"</td>");
+  tr.append("<td>"+path.resolve(__dirname,elem.Value)+"</td>");
   if(elemId != 0){
     tr.append("<td class='table-link table-icon'><a href='#' onclick='MoveUp(this)'><i class='fa fa-arrow-up'></i></a></td>");
   }else{

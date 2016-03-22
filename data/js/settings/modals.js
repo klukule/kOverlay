@@ -1,5 +1,4 @@
 var openedModal = "";
-var path = require("path");
 
 function ConstructModal(fields,target){
   var mid = "Modal-" + (new Date()).getTime();
@@ -16,6 +15,10 @@ function ConstructModal(fields,target){
   $("a").on("click",function(e){
     e.preventDefault();
     OpenLinkExt($(this).attr("href"));
+  });
+  $('#colorPicker').colorpicker();
+  $('#colorPicker').colorpicker().on('changeColor.colorpicker', function(event){
+    console.log($($("#colorPicker").parent().children()[0]).children().first().val(event.color));
   });
 }
 
@@ -91,7 +94,8 @@ function ElementInputWithSend(placeholder,value,editable){
 
 
 function ElementFileInput(placeholder,value,editable){
-  value = path.resolve(__dirname,value);
+  if(value.length > 0)
+    value = path.resolve(__dirname,value);
   var html ="<p class='control is-grouped is-fullwidth is-text-centered'>";
   html+= '<a class="button is-primary" onclick="chooseFile(this)" style="width: 125px;">';
   html+= 'Choose File...';
@@ -149,12 +153,26 @@ function ElementBoolWithSend(placeholder, value){
   return html;
 }
 function ElementColor(placeholder, value){
-  var html = "";
+  var html = '<p><p class="control">';
+  html += ' <input class="input" type="text" placeholder="'+placeholder+'" value="'+value+'">';
+  html += '</p>';
+  html += '<div id="colorPicker" class="is-text-centered is-centered" data-container="#colorPicker" data-color="'+value+'" data-inline="true"></div></p>';
   return html;
 }
 
 function ElementColorWidthSend(placeholder, value){
-  var html = "";
+  // <p class="control is-grouped">
+  //   <input class="input" type="text" placeholder="Color" id="cmOut">
+  //   <a class="button is-primary" id="cmSend">
+  //     Save
+  //   </a>
+  // </p>
+  // <div id="colorPicker" class="is-text-centered is-centered" data-container="#colorPicker" data-color="rgba(255,255,255,1)" data-inline="true"></div>
+  var html = '<p class="control is-grouped">';
+  html += ' <input class="input" type="text" placeholder="'+placeholder+'" value="'+value+'">';
+  html += ' <a class="button is-primary" onclick="ModalSave();">Save</a>';
+  html += '</p>';
+  html += '<div id="colorPicker" class="is-text-centered is-centered" data-container="#colorPicker" data-color="'+value+'" data-inline="true"></div>';
   return html;
 }
 
